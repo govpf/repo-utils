@@ -3,7 +3,6 @@ cffi==1.14.6
 charset-normalizer==2.0.6
 Deprecated==1.2.13
 idna==3.2
-pkg-resources==0.0.0
 pycparser==2.20
 PyGithub==1.55
 PyJWT==2.2.0
