@@ -25,6 +25,6 @@ jobs:
 
     - name: Run script
       run: |
-        python pr_bot.py
+        python pr_bot.py --merge
       env:
         GH_TOKEN: ${{ secrets.GH_TOKEN }}
