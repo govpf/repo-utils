@@ -25,3 +25,5 @@ jobs:
     - name: Run script
       run: |
         python pr_bot.py
+      env:
+        GH_TOKEN: ${{ secrets.GH_TOKEN }}
