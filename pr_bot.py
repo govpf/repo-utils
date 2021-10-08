@@ -14,7 +14,7 @@ g = Github(login_or_token=os.environ.get("GH_TOKEN"))
 
 
 def get_pull_requests():
-    repos = filter(lambda x: x.name.startswith("docker-"), g.get_organization("govpf").get_repos())
+    repos = filter(lambda x: x.name.startswith("docker"), g.get_organization("govpf").get_repos())
     filtered_repos = list(repos)
 
     pull_request_dict: Dict[str, Repository] = {}
@@ -23,7 +23,7 @@ def get_pull_requests():
 
     for repo in filtered_repos:
         for pull in repo.get_pulls(state="open", sort="created"):
-            if pull.user.login in bots and pull.user.type == "Bot":
+            if pull.user.login in bots:
                 pull_request_dict.setdefault(repo.full_name, []).append(pull)
 
         if repo.full_name in pull_request_dict.keys():
@@ -87,7 +87,7 @@ def run(should_merge=False):
 
     for key in errors_summary:
         print(key)
-        print(("---------------"))
+        print("---------------")
 
         for error in errors_summary[key]:
             print(error['title'])
