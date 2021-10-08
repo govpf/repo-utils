@@ -62,9 +62,9 @@ def run(should_merge=False):
                 else:
                     print('Result: Wont be merged')
             elif pull.mergeable_state == 'unstable':
-                print('Result: Wont be merged because all checks have failed')
+                print('Result: Wont be merged because checks have failed')
             elif not pull.mergeable:
-                print('Result: Wont be merged because it has conflicts')
+                print('Result: Wont be merged because it has conflicts or something else')
 
             print()
 
