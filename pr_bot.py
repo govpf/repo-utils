@@ -33,7 +33,7 @@ def get_pull_requests():
 
     print()
 
-    print(f"Found {len(filtered_repos)} repositories")
+    print(f"Found {len(pull_request_dict.keys())} repositories")
     print(f"Found {sum(map(lambda x: len(pull_request_dict[x]), pull_request_dict.keys()))} pull requests")
 
     print()
