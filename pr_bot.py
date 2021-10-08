@@ -67,14 +67,14 @@ def run(should_merge=False):
                 print('Result: Wont be merged because checks have failed')
                 errors_summary.setdefault(key, []).append({
                     "title": f"PR !{pull.number} by {pull.user.login}: '{pull.title}'",
-                    "link:": f"Link: {pull.html_url}",
+                    "link": pull.html_url,
                     "reason": "Wont be merged because checks have failed",
                 })
             elif not pull.mergeable:
                 print('Result: Wont be merged because it has conflicts or something else')
                 errors_summary.setdefault(key, []).append({
                     "title": f"PR !{pull.number} by {pull.user.login}: '{pull.title}'",
-                    "link:": f"Link: {pull.html_url}",
+                    "link": pull.html_url,
                     "reason": "Wont be merged because it has conflicts or something else",
                 })
 
