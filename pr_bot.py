@@ -44,6 +44,8 @@ def get_pull_requests():
 def run(should_merge=False):
     prs = get_pull_requests()
 
+    errors_summary = {}
+
     for key in prs:
         print("---------------")
         print(key)
@@ -63,10 +65,36 @@ def run(should_merge=False):
                     print('Result: Wont be merged')
             elif pull.mergeable_state == 'unstable':
                 print('Result: Wont be merged because checks have failed')
+                errors_summary.setdefault(key, []).append({
+                    "title": f"PR !{pull.number} by {pull.user.login}: '{pull.title}'",
+                    "link:": f"Link: {pull.html_url}",
+                    "reason": "Wont be merged because checks have failed",
+                })
             elif not pull.mergeable:
                 print('Result: Wont be merged because it has conflicts or something else')
+                errors_summary.setdefault(key, []).append({
+                    "title": f"PR !{pull.number} by {pull.user.login}: '{pull.title}'",
+                    "link:": f"Link: {pull.html_url}",
+                    "reason": "Wont be merged because it has conflicts or something else",
+                })
 
             print()
+
+    if len(errors_summary.keys()) > 0:
+        print()
+        print("Errors summary:")
+        print()
+
+    for key in errors_summary:
+        print(key)
+        print(("---------------"))
+
+        for error in errors_summary[key]:
+            print(error['title'])
+            print(f"Link: {error['link']}")
+            print(f"Reason: {error['reason']}")
+            print()
+
 
 
 def main():
