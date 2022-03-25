@@ -1,7 +1,7 @@
 #!/bin/sh
 set -e
 
-export MUSL_LOCPATH /usr/share/i18n/locales/musl
+export MUSL_LOCPATH=/usr/share/i18n/locales/musl
 
 MUSL_LOCALE_DEV_DEPS="cmake make musl-dev gcc gettext-dev"
 MUSL_LOCALE_DEPS="gettext libintl"
