@@ -1,0 +1,21 @@
+#!/bin/sh
+set -e
+
+for cert_file in `ls /usr/local/share-ca-certificates`
+do
+    cert_path="/usr/local/share/ca-certificates/$cert_file"
+    sed -i -e '$a\' "$cert_path"
+
+    keytool -keystore cacerts -storepass changeit -noprompt -trustcacerts -importcert -alias "${cert_file%.*}" -file "$cert_path"
+done
+
+BIN_JCE="https://bin.gov.pf/artifactory/public/jce"
+for policy_jar in $(find / -name "local_policy.jar" -exec ls {} \;)
+do
+    curl "$BIN_JCE/local_policy.jar" > "$policy_jar"
+done
+
+for policy_jar in $(find / -name "US_export_policy.jar" -exec ls {} \;)
+do
+    curl "$BIN_JCE/US_export_policy.jar" > "$policy_jar"
+done

@@ -1,0 +1,16 @@
+#!/bin/sh
+set -e
+
+lines=$(cat <<EOF
+/etc/debian_version;debian
+/etc/os-release;alpine
+EOF
+)
+
+for line in $lines
+do
+    if test -f "$(echo $line | cut -f1 -d';')"; then
+        echo $line | cut -f2 -d';'
+        break
+    fi
+done
