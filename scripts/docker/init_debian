@@ -1,0 +1,11 @@
+#!/bin/sh
+# Please copy the following line in the Dockerfile
+# ENV TZ Pacific/Tahiti
+set -e
+
+apt-get update && apt-get install -y --no-install-recommends locales
+
+sed -i -e 's/# fr_FR.UTF-8 UTF-8/fr_FR.UTF-8 UTF-8/' /etc/locale.gen
+locale-gen 'fr_FR.UTF-8'
+
+rm -rf /var/lib/apt/lists/*
